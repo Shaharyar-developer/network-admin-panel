@@ -6,13 +6,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useQueryState } from "nuqs";
 
 import { Button } from "../ui/button";
 
 export default function Status() {
+  const [_, setMode] = useQueryState("mode");
   return (
     <div className="flex flex-col gap-2">
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("status-device-info")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         Device Information
       </Button>
 
@@ -23,17 +29,29 @@ export default function Status() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>Wireless Status</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-wireless-status")}>
+            Wireless Status
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>WiFi Clients List</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-wifi-clients-list")}>
+            WiFi Clients List
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>STA Status</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-sta-status")}>
+            STA Status
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>WiFi Coverage</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-wifi-coverage")}>
+            WiFi Coverage
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("status-wan-status")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         WAN Status
       </Button>
 
@@ -44,17 +62,31 @@ export default function Status() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>LAN Status</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-lan-status")}>
+            LAN Status
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Ethernet Ports</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-ethernet-ports")}>
+            Ethernet Ports
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>DHCP Clients List</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setMode("status-dhcp-clients-list")}>
+            DHCP Clients List
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("status-optical-info")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         Optical Info
       </Button>
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("status-voip-status")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         VoIP Status
       </Button>
     </div>

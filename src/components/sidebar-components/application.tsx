@@ -8,26 +8,50 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Button } from "../ui/button";
+import { useQueryState } from "nuqs";
 
 export default function Application() {
+  const [_, setMode] = useQueryState("mode");
+
   return (
     <div className="flex flex-col gap-2">
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("application-ddns")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         DDNS
       </Button>
 
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("application-port-forwarding")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         Port Forwarding
       </Button>
-      <Button variant={"ghost"} className="justify-start rounded-none">
+
+      <Button
+        onClick={() => setMode("application-nat")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         NAT
       </Button>
 
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("application-upnp")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         UPNP
       </Button>
 
-      <Button variant={"ghost"} className="justify-start rounded-none">
+      <Button
+        onClick={() => setMode("application-dmz")}
+        variant={"ghost"}
+        className="justify-start rounded-none"
+      >
         DMZ
       </Button>
       <DropdownMenu>
@@ -37,9 +61,17 @@ export default function Application() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>Ping Diagnosis</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => setMode("application-ping-diagnosis")}
+          >
+            Ping Diagnosis
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Tracert Diagnosis</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => setMode("application-tracert-diagnosis")}
+          >
+            Tracert Diagnosis
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
