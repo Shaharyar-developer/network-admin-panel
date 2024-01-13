@@ -36,9 +36,11 @@ type protocol = "http" | "https";
 export const SecurityFirewallControl = ({
   firewallRules,
   setFirewallRules,
+  setLog,
 }: {
   firewallRules: FirewallRule[];
   setFirewallRules: React.Dispatch<React.SetStateAction<FirewallRule[]>>;
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
   const [firewall, setFirewall] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
@@ -60,10 +62,14 @@ export const SecurityFirewallControl = ({
     } else {
       toast.error("Please fill in all the fields.");
     }
+    setLog((prev) => [
+      ...prev,
+      `Added new firewall rule: ${sourceRef.current?.value} ${destinationRef.current?.value} ${protocol}`,
+    ]);
   };
   return (
     <div className="flex flex-col gap-4">
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border  lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>Firewall</TableCell>
@@ -71,7 +77,13 @@ export const SecurityFirewallControl = ({
               <ShieldBan />
               <Switch
                 checked={firewall}
-                onCheckedChange={(e) => setFirewall(e)}
+                onCheckedChange={(e) => {
+                  setFirewall(e);
+                  setLog((prev) => [
+                    ...prev,
+                    `Firewall has been ${e ? "enabled" : "disabled"}`,
+                  ]);
+                }}
               />
               <Shield />
             </TableCell>
@@ -79,7 +91,16 @@ export const SecurityFirewallControl = ({
           <TableRow>
             <TableCell>Filter Mode</TableCell>
             <TableCell className="flex items-center gap-3">
-              <Select disabled={!firewall} defaultValue="Blacklist">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    `Firewall filter mode has been set to ${e}`,
+                  ]);
+                }}
+                disabled={!firewall}
+                defaultValue="Blacklist"
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -150,15 +171,27 @@ export const SecurityFirewallControl = ({
     </div>
   );
 };
-export const SecurityDDOSControl = () => {
+export const SecurityDDOSControl = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
-    <Table className="container mx-auto border border-t-0">
+    <Table className="container mx-auto border lg:border-t-0">
       <TableBody>
         <TableRow>
           <TableCell>DDOS</TableCell>
           <TableCell className="flex items-center gap-2 text-muted-foreground">
             <ShieldBan />
-            <Switch defaultChecked />
+            <Switch
+              onCheckedChange={(e) => {
+                setLog((prev) => [
+                  ...prev,
+                  `DDOS has been ${e ? "enabled" : "disabled"}`,
+                ]);
+              }}
+              defaultChecked
+            />
             <Shield />
           </TableCell>
         </TableRow>
@@ -166,15 +199,27 @@ export const SecurityDDOSControl = () => {
     </Table>
   );
 };
-export const SecurityHTTPSControl = () => {
+export const SecurityHTTPSControl = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
-    <Table className="container mx-auto border border-t-0">
+    <Table className="container mx-auto border lg:border-t-0">
       <TableBody>
         <TableRow>
           <TableCell>HTTPS</TableCell>
           <TableCell className="flex items-center gap-2 text-muted-foreground">
             <ShieldBan />
-            <Switch defaultChecked />
+            <Switch
+              onCheckedChange={(e) => {
+                setLog((prev) => [
+                  ...prev,
+                  `HTTPS has been ${e ? "enabled" : "disabled"}`,
+                ]);
+              }}
+              defaultChecked
+            />
             <Shield />
           </TableCell>
         </TableRow>

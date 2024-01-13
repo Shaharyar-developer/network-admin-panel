@@ -38,11 +38,13 @@ type protocol = "UDP" | "TCP";
 export const ApplicationPortForwarding = ({
   portForwardingRules,
   setPortForwardingRules,
+  setLog,
 }: {
   portForwardingRules: PortForwardingRule[];
   setPortForwardingRules: React.Dispatch<
     React.SetStateAction<PortForwardingRule[]>
   >;
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
   const [portForwading, setPortForwarding] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
@@ -74,11 +76,15 @@ export const ApplicationPortForwarding = ({
     } else {
       toast.error("Please fill out all fields");
     }
+    setLog((prev) => [
+      ...prev,
+      `Port Forwarding Rule has been added with name ${nameRef.current?.value}, IP ${ipRef.current?.value}, Public Port ${publicPortRef.current?.value}, Private Port ${privatePortRef.current?.value}, Protocol ${protocol}`,
+    ]);
   };
 
   return (
     <div className="flex flex-col gap-12">
-      <Table className="container mx-auto  border border-t-0">
+      <Table className="container mx-auto  border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>Port Forwarding Rules</TableCell>
@@ -87,7 +93,13 @@ export const ApplicationPortForwarding = ({
                 <ShieldBan />
                 <Switch
                   checked={portForwading}
-                  onCheckedChange={(e) => setPortForwarding(e)}
+                  onCheckedChange={(e) => {
+                    setPortForwarding(e);
+                    setLog((prev) => [
+                      ...prev,
+                      `Port Forwarding has been ${e ? "enabled" : "disabled"}`,
+                    ]);
+                  }}
                 />
                 <Shield />
               </div>
@@ -177,16 +189,28 @@ export const ApplicationPortForwarding = ({
     </div>
   );
 };
-export const ApplicationUPNP = () => {
+export const ApplicationUPNP = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
-    <Table className="container mx-auto border border-t-0">
+    <Table className="container mx-auto border lg:border-t-0">
       <TableBody>
         <TableRow>
           <TableCell>UPNP</TableCell>
           <TableCell>
             <div className="flex items-center gap-2 text-muted-foreground">
               <ShieldBan />
-              <Switch defaultChecked />
+              <Switch
+                onCheckedChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    `UPNP has been ${e ? "enabled" : "disabled"}`,
+                  ]);
+                }}
+                defaultChecked
+              />
               <Shield />
             </div>
           </TableCell>

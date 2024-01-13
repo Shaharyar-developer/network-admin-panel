@@ -28,9 +28,11 @@ import {
 import {
   DeviceAccountManagement,
   DeviceManagement,
+  DeviceLogs,
 } from "@/components/selections/device";
 
 export const SelectionContent = () => {
+  const [log, setLog] = useState<string[]>([]);
   const [mode] = useQueryState("mode");
   const [firewallRules, setFirewallRules] = useState<FirewallRule[]>([
     { destination: "youtube.com", protocol: "https", source: "192.168.1.*" },
@@ -59,30 +61,47 @@ export const SelectionContent = () => {
       {mode === "status-wireless-status" && <StatusNetworkInfo />}
       {mode === "status-wan-status" && <StatusWANInfo />}
       {mode === "status-lan-status" && <StatusLANInfo />}
-      {mode === "network-wlan-settings" && <NetworkWLANSettings />}
-      {mode === "network-lan-settings" && <NetworkLANSettings />}
-      {mode === "network-broadband-settings" && <NetworkBroadbandSettings />}
-      {mode === "network-remote-management" && <NetworkRemoteManagement />}
-      {mode === "network-voip-settings" && <NetworkVoIPSettings />}
+      {mode === "network-wlan-settings" && (
+        <NetworkWLANSettings setLog={setLog} />
+      )}
+      {mode === "network-lan-settings" && (
+        <NetworkLANSettings setLog={setLog} />
+      )}
+      {mode === "network-broadband-settings" && (
+        <NetworkBroadbandSettings setLog={setLog} />
+      )}
+      {mode === "network-remote-management" && (
+        <NetworkRemoteManagement setLog={setLog} />
+      )}
+      {mode === "network-voip-settings" && (
+        <NetworkVoIPSettings setLog={setLog} />
+      )}
       {mode === "security-firewall" && (
         <SecurityFirewallControl
           firewallRules={firewallRules}
           setFirewallRules={setFirewallRules}
+          setLog={setLog}
         />
       )}
-      {mode === "security-ddos" && <SecurityDDOSControl />}
-      {mode === "security-https" && <SecurityHTTPSControl />}
+      {mode === "security-ddos" && <SecurityDDOSControl setLog={setLog} />}
+      {mode === "security-https" && <SecurityHTTPSControl setLog={setLog} />}
       {mode === "application-port-forwarding" && (
         <ApplicationPortForwarding
           portForwardingRules={portForwardingRules}
           setPortForwardingRules={setPortForwardingRules}
+          setLog={setLog}
         />
       )}
-      {mode === "application-upnp" && <ApplicationUPNP />}
+      {mode === "application-upnp" && <ApplicationUPNP setLog={setLog} />}
       {mode === "device-account-management" && (
-        <DeviceAccountManagement Users={users} setUsers={setUsers} />
+        <DeviceAccountManagement
+          Users={users}
+          setUsers={setUsers}
+          setLog={setLog}
+        />
       )}
-      {mode === "device-management" && <DeviceManagement />}
+      {mode === "device-management" && <DeviceManagement setLog={setLog} />}
+      {mode === "device-log" && <DeviceLogs logs={log} />}
     </div>
   );
 };

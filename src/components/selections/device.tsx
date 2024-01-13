@@ -27,9 +27,11 @@ import type { User } from "@/lib/types";
 export const DeviceAccountManagement = ({
   Users,
   setUsers,
+  setLog,
 }: {
   Users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
   useEffect(() => {
     toast.info(
@@ -59,10 +61,14 @@ export const DeviceAccountManagement = ({
     confirmPasswordRef.current.value = "";
 
     setUsers((prev) => [...prev, { name, password, role }]);
+    setLog((prev) => [
+      ...prev,
+      `Added user ${name}, with role ${role} and password ${password}`,
+    ]);
   };
   return (
     <div className="flex flex-col gap-12">
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>Name</TableCell>
@@ -155,15 +161,23 @@ export const DeviceAccountManagement = ({
     </div>
   );
 };
-export const DeviceManagement = () => {
+export const DeviceManagement = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   const [powerRange, setPowerRange] = useState<number[]>([100]);
   return (
-    <Table className="container mx-auto border border-t-0">
+    <Table className="container mx-auto border lg:border-t-0">
       <TableBody>
         <TableRow>
           <TableCell>Restore All Settings</TableCell>
           <TableCell>
-            <Button>
+            <Button
+              onClick={() => {
+                setLog((prev) => [...prev, "Restored all settings"]);
+              }}
+            >
               <RefreshCcw />
             </Button>
           </TableCell>
@@ -171,7 +185,11 @@ export const DeviceManagement = () => {
         <TableRow>
           <TableCell>Reboot Device</TableCell>
           <TableCell>
-            <Button>
+            <Button
+              onClick={() => {
+                setLog((prev) => [...prev, "Rebooted device"]);
+              }}
+            >
               <Power />
             </Button>
           </TableCell>
@@ -182,7 +200,10 @@ export const DeviceManagement = () => {
             {powerRange[0]}%
             <Slider
               value={powerRange}
-              onValueChange={setPowerRange}
+              onValueChange={(e) => {
+                setPowerRange(e);
+                setLog((prev) => [...prev, `Max power usage set to ${e[0]}%`]);
+              }}
               defaultValue={[100]}
               max={100}
               min={10}
@@ -190,6 +211,32 @@ export const DeviceManagement = () => {
             />
           </TableCell>
         </TableRow>
+      </TableBody>
+    </Table>
+  );
+};
+export const DeviceLogs = ({ logs }: { logs: string[] }) => {
+  useEffect(() => {
+    logs.length === 0 &&
+      toast.info("No logs to display, Try Interacting with some options");
+  }, [logs]);
+  return (
+    <Table className="container mx-auto border lg:border-t-0">
+      <TableBody>
+        {logs.map((log, idx) => (
+          <TableRow
+            onClick={() => {
+              navigator.clipboard.writeText(log);
+              toast.success("Copied to clipboard");
+            }}
+            key={idx}
+          >
+            <TableCell>{idx + 1}.</TableCell>
+            <TableCell>
+              <span>{log}</span>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );

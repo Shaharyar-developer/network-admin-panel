@@ -13,11 +13,15 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { WifiOff, Wifi, Server, ServerOff } from "lucide-react";
-export const NetworkWLANSettings = () => {
+export const NetworkWLANSettings = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   const [wifi, setWifi] = useState<boolean>(true);
   return (
     <>
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>WiFi</TableCell>
@@ -28,6 +32,10 @@ export const NetworkWLANSettings = () => {
                 onCheckedChange={(e) => {
                   setWifi(e);
                   toast.info("WiFi has been turned " + (e ? "on" : "off"));
+                  setLog((prev) => [
+                    ...prev,
+                    "WiFi has been turned " + (e ? "on" : "off"),
+                  ]);
                 }}
               />
               <Wifi scale={0.4} />
@@ -52,7 +60,16 @@ export const NetworkWLANSettings = () => {
           <TableRow>
             <TableCell>Frequency</TableCell>
             <TableCell>
-              <Select disabled={!wifi} defaultValue="40Mhz">
+              <Select
+                onValueChange={(value: string) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Frequency has been set to " + value,
+                  ]);
+                }}
+                disabled={!wifi}
+                defaultValue="40Mhz"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -66,7 +83,13 @@ export const NetworkWLANSettings = () => {
           <TableRow>
             <TableCell>Channel</TableCell>
             <TableCell>
-              <Select disabled={!wifi} defaultValue="11">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "Channel has been set to " + e]);
+                }}
+                disabled={!wifi}
+                defaultValue="11"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -91,7 +114,16 @@ export const NetworkWLANSettings = () => {
           <TableRow>
             <TableCell>Guard Interval</TableCell>
             <TableCell>
-              <Select disabled={!wifi} defaultValue="Auto">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Guard Interval has been set to " + e,
+                  ]);
+                }}
+                disabled={!wifi}
+                defaultValue="Auto"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -106,7 +138,16 @@ export const NetworkWLANSettings = () => {
           <TableRow>
             <TableCell>Power Level</TableCell>
             <TableCell>
-              <Select disabled={!wifi} defaultValue="Auto">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Power Level has been set to " + e,
+                  ]);
+                }}
+                disabled={!wifi}
+                defaultValue="Auto"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -124,15 +165,25 @@ export const NetworkWLANSettings = () => {
     </>
   );
 };
-export const NetworkLANSettings = () => {
+export const NetworkLANSettings = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
     <>
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>LAN Interface</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "LAN Interface has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px] "
                 defaultValue={"192.168.1.1"}
               />
@@ -142,6 +193,12 @@ export const NetworkLANSettings = () => {
             <TableCell>Subnet Mask</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Subnet Mask has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"255.255.255.0.0"}
               />
@@ -150,7 +207,12 @@ export const NetworkLANSettings = () => {
           <TableRow className="mx-auto">
             <TableCell>DHCP Type</TableCell>
             <TableCell>
-              <Select defaultValue="Server">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "DHCP Type has been set to " + e]);
+                }}
+                defaultValue="Server"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -165,6 +227,12 @@ export const NetworkLANSettings = () => {
             <TableCell>Start IP</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Start IP has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"192.168.1.2"}
               />
@@ -174,6 +242,12 @@ export const NetworkLANSettings = () => {
             <TableCell>End IP</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "End IP has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"192.168.1.3"}
               />
@@ -183,6 +257,12 @@ export const NetworkLANSettings = () => {
             <TableCell>DHCP Subnet Mask</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "DHCP Subnet Mask has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"255.255.255.255"}
               />
@@ -192,6 +272,12 @@ export const NetworkLANSettings = () => {
             <TableCell>DHCP Primary DNS</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "DHCP Primary DNS has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"8.8.8.8"}
               />
@@ -201,6 +287,12 @@ export const NetworkLANSettings = () => {
             <TableCell>DHCP Secondary DNS</TableCell>
             <TableCell>
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "DHCP Secondary DNS has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"8.8.4.4"}
               />
@@ -211,15 +303,24 @@ export const NetworkLANSettings = () => {
     </>
   );
 };
-export const NetworkBroadbandSettings = () => {
+export const NetworkBroadbandSettings = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
     <>
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>WAN</TableCell>
             <TableCell>
-              <Select defaultValue="Enabled">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "WAN has been set to " + e]);
+                }}
+                defaultValue="Enabled"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -233,7 +334,15 @@ export const NetworkBroadbandSettings = () => {
           <TableRow>
             <TableCell>Connection Type</TableCell>
             <TableCell>
-              <Select defaultValue="Route">
+              <Select
+                defaultValue="Route"
+                onValueChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Connection Type has been set to " + e,
+                  ]);
+                }}
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -248,6 +357,12 @@ export const NetworkBroadbandSettings = () => {
             <TableCell>VLAN ID</TableCell>
             <TableCell className="flex items-center gap-2">
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "VLAN ID has been set to " + e.target.value,
+                  ]);
+                }}
                 pattern="[1-9]|[1-9][0-9]{1,3}|[1-3][0-9]{1,3}|4[0-8][0-9]{1,2}|409[0-4]"
                 className="lg:w-[300px]"
                 defaultValue={"1"}
@@ -259,6 +374,12 @@ export const NetworkBroadbandSettings = () => {
             <TableCell>Priority</TableCell>
             <TableCell className="flex items-center gap-2">
               <Input
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Priority has been set to " + e.target.value,
+                  ]);
+                }}
                 pattern="[0-7]"
                 className="lg:w-[300px]"
                 defaultValue={"0"}
@@ -269,7 +390,12 @@ export const NetworkBroadbandSettings = () => {
           <TableRow>
             <TableCell>NAT</TableCell>
             <TableCell>
-              <Select defaultValue="Enabled">
+              <Select
+                defaultValue="Enabled"
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "NAT has been set to " + e]);
+                }}
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -283,7 +409,12 @@ export const NetworkBroadbandSettings = () => {
           <TableRow>
             <TableCell>DNS Relay</TableCell>
             <TableCell>
-              <Select defaultValue="Enabled">
+              <Select
+                defaultValue="Enabled"
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "DNS Relay has been set to " + e]);
+                }}
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -297,7 +428,12 @@ export const NetworkBroadbandSettings = () => {
           <TableRow>
             <TableCell>IP Mode</TableCell>
             <TableCell>
-              <Select defaultValue="Dynamic">
+              <Select
+                onValueChange={(e) => {
+                  setLog((prev) => [...prev, "IP Mode has been set to " + e]);
+                }}
+                defaultValue="Dynamic"
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -311,7 +447,15 @@ export const NetworkBroadbandSettings = () => {
           <TableRow>
             <TableCell>WAN IP Mode</TableCell>
             <TableCell>
-              <Select defaultValue="Dynamic">
+              <Select
+                defaultValue="Dynamic"
+                onValueChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "WAN IP Mode has been set to " + e,
+                  ]);
+                }}
+              >
                 <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -328,17 +472,29 @@ export const NetworkBroadbandSettings = () => {
     </>
   );
 };
-export const NetworkRemoteManagement = () => {
+export const NetworkRemoteManagement = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   const [remote, setRemote] = useState<boolean>(true);
   return (
     <>
-      <Table className="container mx-auto border border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>Remote Server</TableCell>
             <TableCell className="flex items-center gap-2 text-muted-foreground">
               <ServerOff strokeWidth={1.6} />
-              <Switch checked={remote} onCheckedChange={(e) => setRemote(e)} />
+              <Switch
+                checked={remote}
+                onCheckedChange={(e) => {
+                  setRemote(e);
+                  toast.info(
+                    "Remote Server has been turned " + (e ? "on" : "off")
+                  );
+                }}
+              />
               <Server strokeWidth={1.6} />
             </TableCell>
           </TableRow>
@@ -347,6 +503,12 @@ export const NetworkRemoteManagement = () => {
             <TableCell>
               <Input
                 disabled={!remote}
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Remote Server URL has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"127.0.0.1/8080"}
               />
@@ -357,6 +519,12 @@ export const NetworkRemoteManagement = () => {
             <TableCell>
               <Input
                 disabled={!remote}
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Remote Server Username has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"admin"}
               />
@@ -367,6 +535,12 @@ export const NetworkRemoteManagement = () => {
             <TableCell>
               <Input
                 disabled={!remote}
+                onChange={(e) => {
+                  setLog((prev) => [
+                    ...prev,
+                    "Remote Server Password has been set to " + e.target.value,
+                  ]);
+                }}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"admin"}
                 type="password"
@@ -378,14 +552,23 @@ export const NetworkRemoteManagement = () => {
     </>
   );
 };
-export const NetworkVoIPSettings = () => {
+export const NetworkVoIPSettings = ({
+  setLog,
+}: {
+  setLog: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
   return (
-    <Table className="container mx-auto border border-t-0">
+    <Table className="container mx-auto border lg:border-t-0">
       <TableBody>
         <TableRow>
           <TableCell>VoIP Mode</TableCell>
           <TableCell>
-            <Select defaultValue="SIP">
+            <Select
+              onValueChange={(e) => {
+                setLog((prev) => [...prev, "VoIP Mode has been set to " + e]);
+              }}
+              defaultValue="SIP"
+            >
               <SelectTrigger className="w-[180px] lg:w-[300px]">
                 <SelectValue />
               </SelectTrigger>
@@ -399,7 +582,12 @@ export const NetworkVoIPSettings = () => {
         <TableRow>
           <TableCell>Port 1</TableCell>
           <TableCell>
-            <Select defaultValue="Enabled">
+            <Select
+              defaultValue="Enabled"
+              onValueChange={(e) => {
+                setLog((prev) => [...prev, "Port 1 has been set to " + e]);
+              }}
+            >
               <SelectTrigger className="w-[180px] lg:w-[300px]">
                 <SelectValue />
               </SelectTrigger>
@@ -414,6 +602,12 @@ export const NetworkVoIPSettings = () => {
           <TableCell>IP</TableCell>
           <TableCell>
             <Input
+              onChange={(e) => {
+                setLog((prev) => [
+                  ...prev,
+                  "IP has been set to " + e.target.value,
+                ]);
+              }}
               className="w-[180px] lg:w-[300px]"
               defaultValue={"127.0.0.1"}
             />
@@ -423,6 +617,12 @@ export const NetworkVoIPSettings = () => {
           <TableCell>NetMask</TableCell>
           <TableCell>
             <Input
+              onChange={(e) => {
+                setLog((prev) => [
+                  ...prev,
+                  "NetMask has been set to " + e.target.value,
+                ]);
+              }}
               className="w-[180px] lg:w-[300px]"
               defaultValue={"255.0.0.0"}
             />
@@ -431,7 +631,16 @@ export const NetworkVoIPSettings = () => {
         <TableRow>
           <TableCell>Local Port</TableCell>
           <TableCell>
-            <Input className="w-[180px] lg:w-[300px]" defaultValue={"5060"} />
+            <Input
+              className="w-[180px] lg:w-[300px]"
+              defaultValue={"5060"}
+              onChange={(e) => {
+                setLog((prev) => [
+                  ...prev,
+                  "Local Port has been set to " + e.target.value,
+                ]);
+              }}
+            />
           </TableCell>
         </TableRow>
       </TableBody>
