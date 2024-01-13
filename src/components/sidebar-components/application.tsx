@@ -1,23 +1,17 @@
 "use client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
 
 import { Button } from "../ui/button";
 import { useQueryState } from "nuqs";
 
 export default function Application() {
-  const [_, setMode] = useQueryState("mode");
+  const [mode, setMode] = useQueryState("mode");
 
   return (
     <div className="flex flex-col gap-2">
       <Button
         onClick={() => setMode("application-ddns")}
-        variant={"ghost"}
+        disabled={mode === "application-ddns"}
+        variant={"link"}
         className="justify-start rounded-none"
       >
         DDNS
@@ -25,7 +19,8 @@ export default function Application() {
 
       <Button
         onClick={() => setMode("application-port-forwarding")}
-        variant={"ghost"}
+        disabled={mode === "application-port-forwarding"}
+        variant={"link"}
         className="justify-start rounded-none"
       >
         Port Forwarding
@@ -33,7 +28,8 @@ export default function Application() {
 
       <Button
         onClick={() => setMode("application-nat")}
-        variant={"ghost"}
+        disabled={mode === "application-nat"}
+        variant={"link"}
         className="justify-start rounded-none"
       >
         NAT
@@ -41,7 +37,8 @@ export default function Application() {
 
       <Button
         onClick={() => setMode("application-upnp")}
-        variant={"ghost"}
+        disabled={mode === "application-upnp"}
+        variant={"link"}
         className="justify-start rounded-none"
       >
         UPNP
@@ -49,31 +46,20 @@ export default function Application() {
 
       <Button
         onClick={() => setMode("application-dmz")}
-        variant={"ghost"}
+        disabled={mode === "application-dmz"}
+        variant={"link"}
         className="justify-start rounded-none"
       >
         DMZ
       </Button>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant={"ghost"} className="justify-start rounded-none">
-            Diagnosis
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() => setMode("application-ping-diagnosis")}
-          >
-            Ping Diagnosis
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => setMode("application-tracert-diagnosis")}
-          >
-            Tracert Diagnosis
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Button
+        onClick={() => setMode("application-voip")}
+        disabled={mode === "application-voip"}
+        variant={"link"}
+        className="justify-start rounded-none"
+      >
+        Diagnosis
+      </Button>
     </div>
   );
 }

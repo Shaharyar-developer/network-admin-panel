@@ -9,7 +9,7 @@ export const Sidebar = () => {
   const [tab] = useQueryState("tab");
 
   return (
-    <nav className="h-[93svh] w-[10%] border-r">
+    <nav className="hidden lg:block w-[10%] border-r">
       {tab === "status" && <Status />}
       {tab === "device" && <Device />}
       {tab === "application" && <Application />}
