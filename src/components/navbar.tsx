@@ -24,7 +24,7 @@ export const Navbar = () => {
     setTimeout(() => {
       toast.info(
         <div className="flex flex-col">
-          <h1>This App is a work in progress, thus incomplete and buggy.</h1>
+          <h1>This web app is for demonstration purposes only.</h1>
           <br />
           <h1>No Data is stored or sent anywhere</h1>
         </div>
