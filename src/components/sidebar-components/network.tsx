@@ -44,15 +44,6 @@ export default function Network() {
       </Button>
 
       <Button
-        variant={"link"}
-        className="justify-start rounded-none"
-        onClick={() => setMode("network-authentication")}
-        disabled={mode === "network-authentication"}
-      >
-        Authentication
-      </Button>
-
-      <Button
         onClick={() => setMode("network-voip-settings")}
         disabled={mode === "network-voip-settings"}
         variant={"link"}

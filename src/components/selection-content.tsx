@@ -6,19 +6,26 @@ import {
   StatusWANInfo,
   StatusLANInfo,
 } from "./selections/status";
+import {
+  NetworkWLANSettings,
+  NetworkLANSettings,
+  NetworkBroadbandSettings,
+  NetworkRemoteManagement,
+  NetworkVoIPSettings,
+} from "./selections/network";
 export const SelectionContent = () => {
   const [mode] = useQueryState("mode");
-  const [tab] = useQueryState("tab");
   return (
     <div className="w-full">
-      {tab === "status" && mode === "status-device-info" && (
-        <StatusDeviceInfo />
-      )}
-      {tab === "status" && mode === "status-wireless-status" && (
-        <StatusNetworkInfo />
-      )}
-      {tab === "status" && mode === "status-wan-status" && <StatusWANInfo />}
-      {tab === "status" && mode === "status-lan-status" && <StatusLANInfo />}
+      {mode === "status-device-info" && <StatusDeviceInfo />}
+      {mode === "status-wireless-status" && <StatusNetworkInfo />}
+      {mode === "status-wan-status" && <StatusWANInfo />}
+      {mode === "status-lan-status" && <StatusLANInfo />}
+      {mode === "network-wlan-settings" && <NetworkWLANSettings />}
+      {mode === "network-lan-settings" && <NetworkLANSettings />}
+      {mode === "network-broadband-settings" && <NetworkBroadbandSettings />}
+      {mode === "network-remote-management" && <NetworkRemoteManagement />}
+      {mode === "network-voip-settings" && <NetworkVoIPSettings />}
     </div>
   );
 };

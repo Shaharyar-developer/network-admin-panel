@@ -18,12 +18,6 @@ export const StatusDeviceInfo = () => {
     <>
       <div className="">
         <Table className="container mx-auto border border-t-0">
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Value</TableHead>
-            </TableRow>
-          </TableHeader>
           <TableBody className="">
             <TableRow>
               <TableCell>Software Version</TableCell>
@@ -91,12 +85,6 @@ export const StatusNetworkInfo = () => {
   return (
     <div>
       <Table className="container mx-auto border border-t-0">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Value</TableHead>
-          </TableRow>
-        </TableHeader>
         <TableBody>
           <TableRow>
             <TableCell>Radio On/Off</TableCell>
@@ -156,12 +144,6 @@ export const StatusWANInfo = () => {
   return (
     <div>
       <Table className="container mx-auto border border-t-0">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Value</TableHead>
-          </TableRow>
-        </TableHeader>
         <TableBody>
           <TableRow>
             <TableCell>WAN IPv6 State</TableCell>
