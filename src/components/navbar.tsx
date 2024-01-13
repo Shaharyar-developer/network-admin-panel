@@ -21,15 +21,25 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (!tab) setTab("status");
-    toast("This App is a work in progress, thus incomplete and buggy")
+    setTimeout(() => {
+      toast.info(
+        <div className="flex flex-col">
+          <h1>This App is a work in progress, thus incomplete and buggy.</h1>
+          <br />
+          <h1>No Data is stored or sent anywhere</h1>
+        </div>
+      );
+    }, 0);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (tab === "status") setMode("status-device-info");
     if (tab === "network") setMode("network-wlan-settings");
     if (tab === "security") setMode("security-firewall");
-    if (tab === "application") setMode("application-ddns");
+    if (tab === "application") setMode("application-port-forwarding");
     if (tab === "device") setMode("device-account-management");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab]);
   return (

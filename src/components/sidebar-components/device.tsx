@@ -13,7 +13,7 @@ export default function Device(): React.JSX.Element {
         onClick={() => setMode("device-account-management")}
         disabled={mode === "device-account-management"}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         Account Management
       </Button>
@@ -22,7 +22,7 @@ export default function Device(): React.JSX.Element {
         onClick={() => setMode("device-management")}
         disabled={mode === "device-management"}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         Device Management
       </Button>
@@ -31,7 +31,7 @@ export default function Device(): React.JSX.Element {
         onClick={() => setMode("device-log")}
         disabled={mode === "device-log"}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         Log
       </Button>

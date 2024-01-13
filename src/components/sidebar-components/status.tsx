@@ -12,7 +12,7 @@ export default function Status() {
         disabled={mode === "status-device-info"}
         onClick={() => setMode("status-device-info")}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         Device Information
       </Button>
@@ -21,7 +21,7 @@ export default function Status() {
         disabled={mode === "status-wireless-status"}
         onClick={() => setMode("status-wireless-status")}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         Wireless Status
       </Button>
@@ -30,7 +30,7 @@ export default function Status() {
         disabled={mode === "status-wan-status"}
         onClick={() => setMode("status-wan-status")}
         variant={"link"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         WAN Status
       </Button>
@@ -39,7 +39,7 @@ export default function Status() {
         variant={"link"}
         onClick={() => setMode("status-lan-status")}
         disabled={mode === "status-lan-status"}
-        className="justify-start rounded-none"
+        className="justify-start rounded-none max-w-max"
       >
         LAN Status
       </Button>

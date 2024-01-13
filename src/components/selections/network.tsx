@@ -37,7 +37,7 @@ export const NetworkWLANSettings = () => {
             <TableCell>Network Mode</TableCell>
             <TableCell>
               <Select disabled={!wifi} defaultValue="802.11 b/g/n">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -53,7 +53,7 @@ export const NetworkWLANSettings = () => {
             <TableCell>Frequency</TableCell>
             <TableCell>
               <Select disabled={!wifi} defaultValue="40Mhz">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -67,7 +67,7 @@ export const NetworkWLANSettings = () => {
             <TableCell>Channel</TableCell>
             <TableCell>
               <Select disabled={!wifi} defaultValue="11">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -92,7 +92,7 @@ export const NetworkWLANSettings = () => {
             <TableCell>Guard Interval</TableCell>
             <TableCell>
               <Select disabled={!wifi} defaultValue="Auto">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -107,7 +107,7 @@ export const NetworkWLANSettings = () => {
             <TableCell>Power Level</TableCell>
             <TableCell>
               <Select disabled={!wifi} defaultValue="Auto">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] lg:w-[300px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -369,6 +369,7 @@ export const NetworkRemoteManagement = () => {
                 disabled={!remote}
                 className="w-[180px] lg:w-[300px]"
                 defaultValue={"admin"}
+                type="password"
               />
             </TableCell>
           </TableRow>
