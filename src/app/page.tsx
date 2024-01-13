@@ -9,7 +9,7 @@ export default function Home() {
       <Suspense fallback={<Skeleton className="w-full h-full" />}>
         <Navbar />
       </Suspense>
-      <div className="flex h-[93svh] w-full">
+      <div className="flex min-h-[93svh] w-full">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
           <Sidebar />
         </Suspense>

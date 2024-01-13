@@ -9,7 +9,7 @@ export const Sidebar = () => {
   const [tab] = useQueryState("tab");
 
   return (
-    <nav className="hidden lg:block lg:w-[20%] xl:w-[13%] border-r">
+    <nav className="hidden lg:flex flex-col lg:w-[20%] xl:w-[13%] border-r">
       {tab === "status" && <Status />}
       {tab === "network" && <Network />}
       {tab === "application" && <Application />}

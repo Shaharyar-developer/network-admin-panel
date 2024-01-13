@@ -221,23 +221,25 @@ export const DeviceLogs = ({ logs }: { logs: string[] }) => {
       toast.info("No logs to display, Try Interacting with some options");
   }, [logs]);
   return (
-    <Table className="container mx-auto border lg:border-t-0">
-      <TableBody>
-        {logs.map((log, idx) => (
-          <TableRow
-            onClick={() => {
-              navigator.clipboard.writeText(log);
-              toast.success("Copied to clipboard");
-            }}
-            key={idx}
-          >
-            <TableCell>{idx + 1}.</TableCell>
-            <TableCell>
-              <span>{log}</span>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className="">
+      <Table className="container mx-auto border lg:border-t-0">
+        <TableBody>
+          {logs.map((log, idx) => (
+            <TableRow
+              onClick={() => {
+                navigator.clipboard.writeText(log);
+                toast.success("Copied to clipboard");
+              }}
+              key={idx}
+            >
+              <TableCell>{idx + 1}.</TableCell>
+              <TableCell>
+                <span>{log}</span>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
