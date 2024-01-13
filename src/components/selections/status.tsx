@@ -17,7 +17,7 @@ export const StatusDeviceInfo = ({}: {}) => {
   return (
     <>
       <div className="">
-        <Table className="container mx-auto borderlg:border-t-0">
+        <Table className="container mx-auto border lg:border-t-0">
           <TableBody className="">
             <TableRow>
               <TableCell>Software Version</TableCell>
@@ -84,7 +84,7 @@ export const StatusDeviceInfo = ({}: {}) => {
 export const StatusNetworkInfo = ({}: {}) => {
   return (
     <div>
-      <Table className="container mx-auto borderlg:border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>Radio On/Off</TableCell>
@@ -143,7 +143,7 @@ export const StatusNetworkInfo = ({}: {}) => {
 export const StatusWANInfo = ({}: {}) => {
   return (
     <div>
-      <Table className="container mx-auto borderlg:border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableBody>
           <TableRow>
             <TableCell>WAN IPv6 State</TableCell>
@@ -173,7 +173,7 @@ export const StatusWANInfo = ({}: {}) => {
 export const StatusLANInfo = ({}: {}) => {
   return (
     <div>
-      <Table className="container mx-auto borderlg:border-t-0">
+      <Table className="container mx-auto border lg:border-t-0">
         <TableHeader>
           <TableRow>
             <TableHead>Port</TableHead>
