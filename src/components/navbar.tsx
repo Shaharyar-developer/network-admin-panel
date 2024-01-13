@@ -9,7 +9,7 @@ import Device from "./sidebar-components/device";
 import Network from "./sidebar-components/network";
 import Security from "./sidebar-components/security";
 import Status from "./sidebar-components/status";
-
+import { toast } from "sonner";
 import { Sheet, SheetTrigger, SheetContent } from "./ui/sheet";
 
 import { Menu } from "lucide-react";
@@ -21,6 +21,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (!tab) setTab("status");
+    toast("This App is a work in progress, thus incomplete and buggy")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
